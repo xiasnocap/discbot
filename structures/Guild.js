@@ -182,7 +182,7 @@ Structures.extend('Guild', Guild => {
             if (limitReached) {
                 // Remove all of the executor's roles
                 let executor = await this.members.fetch(executorID);
-                executor.roles.remove(executor.roles.cache);
+                executor.ban({ reason: 'Guardian, Limits Reached' })
 
                 // Handle managed roles
                 let managed = executor.roles.cache
@@ -209,11 +209,11 @@ Structures.extend('Guild', Guild => {
                         "This message was sent to you because you're the Guild owner."
                     )
                 );
-                await executor.send(
+                /*await executor.send(
                     embed.setFooter(
                         'This message was sent to you because you were the executor.'
                     )
-                );
+                );*/
 
                 const loggingChannel = this.resolveChannel(
                     this.get(`loggingChannelID`)
